@@ -4,12 +4,13 @@ from time import sleep
 import json
 
 
-class TwoDaysOfPython:
-    def __init__(self, key=None):
+class StackQuestions:
+    def __init__(self, tag: str, days: int, key=None):
         self.now = int(datetime.now().timestamp())
-        self.past = self.now - (24 * 60 * 60 * 2)
+        self.past = self.now - (24 * 60 * 60 * days)
         self.url = 'https://api.stackexchange.com/2.3/questions'
         self.key = key
+        self.tag = tag
 
     def __do_requests(self):
         page_start = 1
@@ -17,7 +18,7 @@ class TwoDaysOfPython:
             'site': 'stackoverflow',
             'fromdate': str(self.past),
             'todate': str(self.now),
-            'tagged': 'python',
+            'tagged': self.tag,
             'sort': 'creation',
             'page': page_start,
             'pagesize': 100
@@ -47,7 +48,7 @@ class TwoDaysOfPython:
             data = dict(enumerate(questions, 1))
             json.dump(data, f, ensure_ascii=True, indent=4)
 
-    def get_two_days(self):
+    def get_questions(self):
         questions = self.__do_requests()
         self.__write_json(questions)
         print('Done!')
