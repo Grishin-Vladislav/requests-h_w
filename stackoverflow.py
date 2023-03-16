@@ -20,12 +20,10 @@ class TwoDaysOfPython:
             'tagged': 'python',
             'sort': 'creation',
             'page': page_start,
+            'pagesize': 100
         }
         if self.key:
             params['key'] = self.key
-            params['pagesize'] = 100
-        else:
-            params['pagesize'] = 30
 
         has_more = True
         questions = []
@@ -37,6 +35,7 @@ class TwoDaysOfPython:
             if not response.json()['has_more']:
                 has_more = False
             sleep(0.04)
+            print(f'page {page_start} ready')
             page_start += 1
             params['page'] = page_start
 
