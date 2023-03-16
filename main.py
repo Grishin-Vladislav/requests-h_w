@@ -4,15 +4,12 @@ from superheroes import HeroesChecker
 from yandex import YaUploader
 from stackoverflow import StackQuestions
 
-
 load_dotenv(find_dotenv())
 
 TOKEN = os.getenv('TOKEN')
 TOKEN1 = os.getenv('TOKEN1')
 
-
 if __name__ == '__main__':
-
     hero = HeroesChecker(('Hulk', 'Captain America', 'Thanos'))
     hero.print_best()
 
